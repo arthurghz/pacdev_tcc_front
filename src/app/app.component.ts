@@ -9,6 +9,6 @@ export class AppComponent implements OnInit{
   title: string;
 
   ngOnInit() {
-   this.title = 'Desafio Picpay Front-end';
+   this.title = 'pacdev-front';
   }
 }
