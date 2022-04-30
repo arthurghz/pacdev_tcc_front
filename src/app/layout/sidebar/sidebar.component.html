@@ -1,0 +1,14 @@
+<mat-sidenav-container>
+    <mat-sidenav opened="true" mode="side" disableClose="true">
+        <mat-nav-list>
+            <mat-list-item [routerLink]="'home'">
+                Home
+            </mat-list-item>
+            <mat-list-item [routerLink]="'listar-pagamentos'">
+                Pagamentos
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+
+<div><router-outlet></router-outlet></div>
+</mat-sidenav-container>

@@ -1,0 +1,90 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+
+$md-primary: (
+    500 : #007dfe,
+    600 : #0075fe,
+    700 : #006afe,
+    800 : #0060fe,
+    900 : #004dfd,
+    A100 : #ffffff,
+    A200 : #f1f4ff,
+    A400 : #becdff,
+    A700 : #a4baff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-accent: (
+    50 : #e0e6ed,
+    100 : #b3c0d2,
+    200 : #8096b4,
+    300 : #4d6c96,
+    400 : #264d80,
+    500 : #002d69,
+    600 : #002861,
+    700 : #002256,
+    800 : #001c4c,
+    900 : #00113b,
+    A100 : #7188ff,
+    A200 : #3e5dff,
+    A400 : #0b33ff,
+    A700 : #0027f1,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$primary: mat-palette($md-primary, 500);
+$accent:  mat-palette($md-accent, 500);
+$warn:    mat-palette($mat-red);
+
+$theme: mat-light-theme($primary, $accent, $warn);
+
+@include angular-material-theme($theme);
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
