@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "picpay-desafio-frontend": {
+    "pacdev-front": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/picpay-desafio-frontend",
+            "outputPath": "dist/pacdev-front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -80,18 +80,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "picpay-desafio-frontend:build"
+            "browserTarget": "pacdev-front:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "picpay-desafio-frontend:build:production"
+              "browserTarget": "pacdev-front:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "picpay-desafio-frontend:build"
+            "browserTarget": "pacdev-front:build"
           }
         },
         "test": {
@@ -134,15 +134,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "picpay-desafio-frontend:serve"
+            "devServerTarget": "pacdev-front:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "picpay-desafio-frontend:serve:production"
+              "devServerTarget": "pacdev-front:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "picpay-desafio-frontend"
+  "defaultProject": "pacdev-front"
 }
