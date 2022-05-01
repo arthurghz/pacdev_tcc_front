@@ -1,11 +1,14 @@
 <mat-sidenav-container>
     <mat-sidenav opened="true" mode="side" disableClose="true">
         <mat-nav-list>
-            <mat-list-item [routerLink]="'home'">
-                Home
+            <mat-list-item  [routerLink]="'home'">
+                <mat-icon class="material-icons-round icon-display">home</mat-icon>
             </mat-list-item>
             <mat-list-item [routerLink]="'listar-pagamentos'">
-                Pagamentos
+                <mat-icon class="material-icons-round icon-display">terminal</mat-icon>
+            </mat-list-item>
+            <mat-list-item [routerLink]="'listar-pagamentos'">
+                <mat-icon class="material-icons-round icon-display">play_circle_outline</mat-icon>
             </mat-list-item>
         </mat-nav-list>
     </mat-sidenav>
