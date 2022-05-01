@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import localePt from '@angular/common/locales/pt';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 registerLocaleData(localePt);
 
@@ -30,6 +31,7 @@ registerLocaleData(localePt);
     RouterModule,
     HttpClientModule,
     LoginModule,
+    ModalModule.forRoot(),
   ],
   providers: [ {provide:MAT_DATE_LOCALE, useValue: 'pt-Br'}, { provide: LOCALE_ID, useValue: 'pt-BR' }  ],
   bootstrap: [AppComponent]
