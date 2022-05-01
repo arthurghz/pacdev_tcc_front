@@ -71,10 +71,45 @@ $md-accent: (
   )
 );
 
+$md-warn: (
+    50 : #e6f7f4,
+    100 : #c1ebe4,
+    200 : #98ddd2,
+    300 : #6ecfbf,
+    400 : #4fc5b2,
+    500 : #30bba4,
+    600 : #2bb59c,
+    700 : #24ac92,
+    800 : #1ea489,
+    900 : #139678,
+    A100 : #c9fff1,
+    A200 : #96ffe5,
+    A400 : #63ffd8,
+    A700 : #49ffd2,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+$gray-color: #e2e2e4;
 $primary: mat-palette($md-primary, 500);
 $button-color : mat-palette($md-primary, 500);
 $accent:  mat-palette($md-accent, 500);
-$warn:    mat-palette($mat-red);
+$warn:    mat-palette($md-warn, 500);
 
 $theme: mat-light-theme($primary, $accent, $warn);
 
@@ -96,11 +131,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 mat-card{
   background: rgba(0, 0, 0, 0.0) !important;
-  border: 0.1px solid #86888b !important;
+  border: 0.1px solid rgba(241, 235, 235, 0.185) !important;
 }
 
 .mat-raised-button{
-  border: 0.1px solid #86888b !important;
+  border: 0.1px solid rgba(241, 235, 235, 0.185) !important;
 
 }
 
@@ -108,8 +143,23 @@ mat-card{
   background-color: rgba(241, 235, 235, 0.123);
 }
 
+th, tr{
+  
+  color: $gray-color;
+  border-bottom: 0.1px solid rgba(241, 235, 235, 0.432);
+} 
+
+th{
+  font-weight: 500;
+}
+
+tr{
+  font-weight: 400;
+}
+
+
 mat-card-title{
-  color: #86888b;
+  color: $gray-color;
 }
 
 .containter-content{

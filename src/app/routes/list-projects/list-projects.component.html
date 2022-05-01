@@ -7,7 +7,31 @@
             <button mat-raised-button color="primary">Cadastrar Novo</button>
           </div>
       </div>
+      <div class="rows mt-5">
+      <table class="table table-borderless">
+        <thead >
+          <tr>
+            <th scope="col">Nome do Projeto</th>
+            <th scope="col">Lista de Repositórios</th>
+            <th scope="col">Visualizar</th>
+            <th scope="col">Teste</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prj of gitProjects"> 
+            <td>{{prj.nameProject}}</td>
+            <td><div *ngFor="let rep of prj.repositories">{{rep}}</div></td>
+            <td><button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+                <mat-icon class="material-icons-outlined">visibility</mat-icon>
+              </button></td>
+            <td> <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+                <mat-icon>play_arrow</mat-icon>
+              </button></td>
+          </tr>
+          
+        </tbody>
+      </table>
+      </div>
 
-      
     </mat-card>
   </div>
