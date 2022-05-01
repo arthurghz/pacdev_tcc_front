@@ -94,10 +94,11 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 mat-card{
-  background: #1E1E1E !important;
+  background: rgba(0, 0, 0, 0.0) !important;
+  border: 0.1px solid #86888b !important;
 }
 mat-card-title{
-  color: gray;
+  color: #86888b;
 }
 
 .containter-content{
