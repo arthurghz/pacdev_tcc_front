@@ -168,9 +168,15 @@ mat-card-title{
   padding: 2em 2em 2em;
 }
 
-.modal-header, .modal-body, .modal-footer{
+.modal-header, .modal-footer{
   background-color: $background-itens;
   border: $border-color !important;
+}
+
+.modal-body{
+  background-color: $background-itens;
+  border-left: $border-color;
+  border-right: $border-color
 }
 
 .modal{
