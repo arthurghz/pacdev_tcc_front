@@ -25,6 +25,8 @@ export class ListProjectsComponent implements OnInit {
 
   modalRef?: BsModalRef | null;
   gitProjects: any;
+  nameProject: any;
+  repoProject: any;
 
   constructor(private projectService:GitProjectsService, private modalService: BsModalService) { }
 
@@ -42,6 +44,20 @@ export class ListProjectsComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+
+
+  saveProject(){
+   let  info = 
+      {
+        github_user: this.nameProject,
+        repo_name: this.repoProject,
+      }
+    
+      console.log(info);
+    this.projectService.saveProject(info).subscribe(resp=>{
+      console.log(resp);
+    });
   }
 
 }

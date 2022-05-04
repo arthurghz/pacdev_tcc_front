@@ -110,6 +110,8 @@ $primary: mat-palette($md-primary, 500);
 $button-color : mat-palette($md-primary, 500);
 $accent:  mat-palette($md-accent, 500);
 $warn:    mat-palette($md-warn, 500);
+$border-color: 0.1px solid rgba(241, 235, 235, 0.63);
+$background-itens: #0d1117;
 
 $theme: mat-light-theme($primary, $accent, $warn);
 
@@ -144,7 +146,6 @@ mat-card{
 }
 
 th, tr{
-  
   color: $gray-color;
   border-bottom: 0.1px solid rgba(241, 235, 235, 0.432);
 } 
@@ -166,10 +167,16 @@ mat-card-title{
   padding: 2em 2em 2em;
 }
 
-.modal-header{
-
+.modal-header, .modal-body, .modal-footer{
+  background-color: $background-itens;
+  border: $border-color !important;
 }
 
-.modal-body{
+.modal{
+  background-color:rgba(241, 235, 235, 0.089)  ;
+}
 
+.mat-sidenav-container{
+  height: 100%;
+  background-color: $background-itens;
 }
