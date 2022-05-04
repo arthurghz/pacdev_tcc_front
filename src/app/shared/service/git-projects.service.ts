@@ -21,6 +21,9 @@ export class GitProjectsService {
     return this.http.post<any>(`${this.endpointApi}/projects`, body);
   }
 
-  getProjectById(){}
-
+  getProjectById(gitUser, repoName){
+  
+    return this.http.get<any>(`${this.endpointApi}/projects/${gitUser}/${repoName}`,{responseType: 'blob' as 'json'});
+  }
+    
 }

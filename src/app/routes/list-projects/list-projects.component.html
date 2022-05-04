@@ -19,9 +19,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let prj of gitProjects"> 
-            <td>{{prj.nameProject}}</td>
+            <td>{{prj.githubUser}}</td>
             <td><div *ngFor="let rep of prj.repositories">{{rep}}</div></td>
-            <td><button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+            <td><button mat-icon-button color="warn" (click)="getInfosProject(prj.githubUser, prj.repositories[0])" aria-label="Example icon button with a heart icon">
                 <mat-icon class="material-icons-outlined">visibility</mat-icon>
               </button></td>
             <td> <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
