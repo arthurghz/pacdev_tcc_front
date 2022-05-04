@@ -106,9 +106,10 @@ $md-warn: (
 
 
 $gray-color: #e2e2e4;
+$input-color: #86888b;
 $primary: mat-palette($md-primary, 500);
 $button-color : mat-palette($md-primary, 500);
-$accent:  mat-palette($md-accent, 500);
+$accent:  mat-palette($md-accent, 200);
 $warn:    mat-palette($md-warn, 500);
 $border-color: 0.1px solid rgba(241, 235, 235, 0.63);
 $background-itens: #0d1117;
@@ -179,4 +180,21 @@ mat-card-title{
 .mat-sidenav-container{
   height: 100%;
   background-color: $background-itens;
+}
+
+/* Border */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: $input-color;
+}
+/* Font color */
+input.mat-input-element{
+  color: $input-color;
+}
+
+mat-label, h4{
+  color: $input-color;
+}
+
+.btn-close{
+  color: white;
 }
