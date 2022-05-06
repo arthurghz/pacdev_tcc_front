@@ -204,3 +204,37 @@ mat-label, h4{
 .btn-close{
   color: white;
 }
+
+
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: rgb(255 238 238 / 4%);
+  border: $border-color;
+}
+
+.mat-select-arrow {
+  color: rgb(255 255 255 / 54%);
+}
+
+.mat-select-panel{
+  background: $background-itens;
+  border: $border-color
+}
+
+.mat-option-text:hover:not(.mat-option-disabled) {
+  background: $input-color !important;
+  color: white;
+}
+
+.mat-option:hover {
+  background: $input-color !important;
+}
+
+.mat-select-value{
+  color: white !important;
+}
+.mat-option-text{
+  color: $gray-color;
+}
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container { z-index: 9999!important; } 

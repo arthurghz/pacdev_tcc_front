@@ -4,7 +4,7 @@
 
       <div class="row mt-5">
           <div class="col d-flex justify-content-end">
-            <button mat-raised-button                                                                                                                                                                                                                                                                                                                                         (click)="openModal(template)" color="primary">Cadastrar Novo</button>
+            <button mat-raised-button (click)="openModal(template)" color="primary">Cadastrar Novo</button>
           </div>
       </div>
       <div class="rows mt-5 table-responsive">
@@ -21,7 +21,9 @@
           <tr *ngFor="let prj of gitProjects"> 
             <td>{{prj.githubUser}}</td>
             <td><div *ngFor="let rep of prj.repositories">{{rep}}</div></td>
-            <td><button mat-icon-button color="warn" (click)="getInfosProject(prj.githubUser, prj.repositories[0])" aria-label="Example icon button with a heart icon">
+            <td>
+              <!-- <button mat-icon-button color="warn" (click)="getInfosProject(prj.githubUser, prj.repositories[0])" aria-label="Example icon button with a heart icon"> -->
+                <button mat-icon-button color="warn" (click)="modalRepositories(modalRepository, prj.repositories, prj.githubUser)" aria-label="Example icon button with a heart icon"> 
                 <mat-icon class="material-icons-outlined">visibility</mat-icon>
               </button></td>
             <td> <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
@@ -67,6 +69,43 @@
     <div class="row">
       <div class="col">
         <button mat-raised-button (click)="saveProject()" color="primary">Salvar</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+
+   
+<ng-template #modalRepository>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Repositórios</h4>
+<!--     <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()"> 
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button> -->
+    <button mat-icon-button color="accent" class="pull-right" (click)="modalRef?.hide()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field appearance="fill">
+          <mat-label>Repositórios</mat-label>
+          <mat-select [(ngModel)]="repSelect" name="">
+            <mat-option>Selecione</mat-option>
+            <mat-option *ngFor="let rep of repositories" [value]="rep">
+              {{rep}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col">
+        <button mat-raised-button (click)=" getInfosProject()" color="primary">Consultar</button>
       </div>
     </div>
   </div>

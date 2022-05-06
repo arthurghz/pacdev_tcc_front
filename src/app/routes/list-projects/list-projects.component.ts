@@ -24,15 +24,18 @@ const projects = [{
 export class ListProjectsComponent implements OnInit {
 
   modalRef?: BsModalRef | null;
+  modalSelectRep?: BsModalRef | null;
   modalMessage: BsModalRef | null;
   gitProjects: any;
   nameProject: any;
   repoProject: any;
+  repositories: any;
+  repSelect:any;
+  gitUserSelect:any;
 
   constructor(private projectService: GitProjectsService, private modalService: BsModalService) { }
 
   ngOnInit(): void {
-
     this.populateTable();
   }
 
@@ -40,7 +43,6 @@ export class ListProjectsComponent implements OnInit {
   populateTable() {
     this.projectService.listProjects().subscribe(resp => {
       this.gitProjects = resp;
-      console.log(resp);
     });
   }
 
@@ -48,6 +50,11 @@ export class ListProjectsComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  modalRepositories(selectRepository: TemplateRef<any>, repositories, gitUser) {
+    this.repositories = repositories;
+    this.gitUserSelect = gitUser
+    this.modalRef = this.modalService.show(selectRepository);
+  }
 
   saveProject() {
     let info =
@@ -63,15 +70,16 @@ export class ListProjectsComponent implements OnInit {
     });
   }
 
-  getInfosProject(gitHubUser, repoName) {
-    console.log(gitHubUser, repoName)
-    this.projectService.getProjectById(gitHubUser, repoName).subscribe(resp => {
+  getInfosProject() {
+
+     this.projectService.getProjectById(this.gitUserSelect, this.repSelect).subscribe(resp => {
       var downloadURL = window.URL.createObjectURL(resp);
       var link = document.createElement('a');
       link.href = downloadURL;
       link.download = "README.txt";
       link.click();
-    })
+      
+    }) 
   }
 
 }
