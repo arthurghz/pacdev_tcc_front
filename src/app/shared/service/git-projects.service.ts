@@ -22,8 +22,12 @@ export class GitProjectsService {
   }
 
   getProjectById(gitUser, repoName){
-  
+
     return this.http.get<any>(`${this.endpointApi}/projects/${gitUser}/${repoName}`,{responseType: 'blob' as 'json'});
+  }
+
+  getFileTest(gitUser, repoName){
+    return this.http.get<any>(`${this.endpointApi}/submission/${gitUser}/${repoName}`,{responseType: 'blob' as 'json'});
   }
     
 }

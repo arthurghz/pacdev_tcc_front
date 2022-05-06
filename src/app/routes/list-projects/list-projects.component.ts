@@ -26,6 +26,7 @@ export class ListProjectsComponent implements OnInit {
   modalRef?: BsModalRef | null;
   modalSelectRep?: BsModalRef | null;
   modalMessage: BsModalRef | null;
+  modalTest: BsModalRef | null;
   gitProjects: any;
   nameProject: any;
   repoProject: any;
@@ -46,14 +47,21 @@ export class ListProjectsComponent implements OnInit {
     });
   }
 
-  openModal(template: TemplateRef<any>) {
+  openModal(template) {
     this.modalRef = this.modalService.show(template);
   }
 
-  modalRepositories(selectRepository: TemplateRef<any>, repositories, gitUser) {
+  modalRepositories(selectRepository, repositories, gitUser) {
+    this.repSelect = '';
     this.repositories = repositories;
     this.gitUserSelect = gitUser
-    this.modalRef = this.modalService.show(selectRepository);
+    this.modalSelectRep = this.modalService.show(selectRepository);
+  }
+
+  modalTestInit(testInit, repositories, gitUser){
+    this.repositories = repositories;
+    this.gitUserSelect = gitUser
+    this.modalTest =  this.modalService.show(testInit);
   }
 
   saveProject() {
@@ -66,7 +74,6 @@ export class ListProjectsComponent implements OnInit {
     console.log(info);
     this.projectService.saveProject(info).subscribe(resp => {
       console.log(resp);
-      String(resp).includes('')
     });
   }
 
@@ -78,8 +85,24 @@ export class ListProjectsComponent implements OnInit {
       link.href = downloadURL;
       link.download = "README.txt";
       link.click();
-      
+      this.modalRef.hide();
+      this.repositories='';
+      this.gitUserSelect=''
     }) 
+  }
+
+  getFileTest(){
+    this.projectService.getFileTest(this.gitUserSelect, this.repSelect).subscribe(resp => {
+      var downloadURL = window.URL.createObjectURL(resp);
+      var link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = "fileTest.txt";
+      link.click();
+    }) 
+  }
+
+  close(){
+    this.modalTest.hide();
   }
 
 }
