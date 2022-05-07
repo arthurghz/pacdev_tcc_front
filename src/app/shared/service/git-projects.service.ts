@@ -29,5 +29,9 @@ export class GitProjectsService {
   getFileTest(gitUser, repoName){
     return this.http.get<any>(`${this.endpointApi}/submission/${gitUser}/${repoName}`,{responseType: 'blob' as 'json'});
   }
+
+  submitTest(gitUser, repoName, formData){
+    return this.http.post<any>(`${this.endpointApi}/submission/${gitUser}/${repoName}`, formData);
+  }
     
 }
