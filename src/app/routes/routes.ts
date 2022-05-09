@@ -10,7 +10,7 @@ export const routes: Routes = [
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
-            { path: 'history', loadChildren: () => import('./listar-pagamentos/listar-pagamentos.module').then(m => m.ListarPagamentosModule) },
+            { path: 'history', loadChildren: () => import('./history-projects/history-projects.module').then(m => m.HistoryProjectsModule) },
             { path: 'list-projects', loadChildren: () => import('./list-projects/list-projects.module').then(m => m.ListProjectsModule) },  
         ],
         canActivate:[],
