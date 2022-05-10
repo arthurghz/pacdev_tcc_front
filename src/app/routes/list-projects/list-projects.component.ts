@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { GitProjectsService } from 'src/app/shared/service/git-projects.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 const projects = [{
   nameProject: "arthurghz",
@@ -26,6 +27,7 @@ export class ListProjectsComponent implements OnInit {
 
   modalRef?: BsModalRef | null;
   modalSelectRep?: BsModalRef | null;
+  modalHistoryList?: BsModalRef | null;
   modalMessage: BsModalRef | null;
   modalTest: BsModalRef | null;
   gitProjects: any;
@@ -41,6 +43,9 @@ export class ListProjectsComponent implements OnInit {
   repSelectError:boolean=false;
   formData = new FormData();
   respMessage:any;
+  showJobId: boolean = false;
+  listJobId:any;
+  page = 1;
 
   formUpload: FormGroup = new FormGroup({
     gitUser: new FormControl(''),
@@ -49,12 +54,11 @@ export class ListProjectsComponent implements OnInit {
   });
 
 
-  constructor(private projectService: GitProjectsService, private modalService: BsModalService) { }
+  constructor(private projectService: GitProjectsService, private modalService: BsModalService, private router:Router) { }
 
   ngOnInit(): void {
     this.populateTable();
   }
-
 
   populateTable() {
     this.projectService.listProjects().subscribe(resp => {
@@ -78,6 +82,13 @@ export class ListProjectsComponent implements OnInit {
     this.repositories = repositories;
     this.gitUserSelect = gitUser
     this.modalTest =  this.modalService.show(testInit);
+  }
+
+  modalHistoryInit(selectRepository, repositories, gitUser){
+    this.repSelect = '';
+    this.repositories = repositories;
+    this.gitUserSelect = gitUser
+    this.modalHistoryList = this.modalService.show(selectRepository);
   }
 
   saveProject() {
@@ -117,9 +128,22 @@ export class ListProjectsComponent implements OnInit {
   }else{
     this.formUpload.get('repo').markAsTouched();
   }
-
-
   }
+
+  getSubmission(repoName){
+    this.repSelect = repoName;
+    console.log(repoName, this.gitUserSelect);
+    this.projectService.getHistoryTest(this.gitUserSelect, repoName).subscribe(resp=>{
+      this.showJobId = true;
+      this.listJobId = resp;
+    });  
+  }
+
+  navigateToJobDetail(value){
+    this.modalHistoryList.hide();
+    this.router.navigate([`/history/${this.gitUserSelect}/${this.repSelect}/${value}`])
+  }
+
 
   onInputFile(event){
    
@@ -162,6 +186,8 @@ export class ListProjectsComponent implements OnInit {
     }
 
   }
+
+
 
   close(){
     this.modalTest.hide();

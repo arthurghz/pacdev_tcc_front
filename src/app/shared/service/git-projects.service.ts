@@ -30,6 +30,18 @@ export class GitProjectsService {
     return this.http.get<any>(`${this.endpointApi}/submission/${gitUser}/${repoName}`,{responseType: 'blob' as 'json'});
   }
 
+  getHistoryTest(gitUser, repoName){
+    return this.http.get<any>(`${this.endpointApi}/history/${gitUser}/${repoName}`);
+  }
+
+  getStatusTest(gitUser, repoName, id){
+    return this.http.get<any>(`${this.endpointApi}/history/${gitUser}/${repoName}/${id}`);
+  }
+
+  getLogTest(gitUser, repoName, id){
+    return this.http.get<any>(`${this.endpointApi}/history/${gitUser}/${repoName}/${id}/log`, {responseType: 'blob' as 'json'});
+  }
+
   submitTest(gitUser, repoName, formData){
     return this.http.post<any>(`${this.endpointApi}/submission/${gitUser}/${repoName}`, formData);
   }

@@ -113,6 +113,7 @@ $accent:  mat-palette($md-accent, 200);
 $warn:    mat-palette($md-warn, 500);
 $border-color: 0.1px solid rgba(241, 235, 235, 0.63);
 $background-itens: #0d1117;
+$warn-color: map-get($md-warn, 500);
 
 $theme: mat-light-theme($primary, $accent, $warn);
 
@@ -249,6 +250,14 @@ mat-label, h4{
 }
 .mat-option-text{
   color: $gray-color;
+}
+
+.ngx-pagination .current{
+  background: $warn-color !important;
+}
+
+.ngx-pagination a{
+  color: white !important;
 }
 
 .cdk-global-overlay-wrapper, .cdk-overlay-container { z-index: 9999!important; } 

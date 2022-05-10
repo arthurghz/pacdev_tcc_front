@@ -37,6 +37,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatTableDataSource} from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 
+import { NgxPaginationModule} from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [],
@@ -76,7 +78,8 @@ import { RouterModule } from '@angular/router';
     MatToolbarModule,
     MatTooltipModule,
     MatNativeDateModule,
-    MatStepperModule
+    MatStepperModule,
+    NgxPaginationModule
   ],
   exports:[
     FormsModule,
@@ -115,7 +118,8 @@ import { RouterModule } from '@angular/router';
     MatNativeDateModule,
     MatStepperModule,
     RouterModule,
-    
+    NgxPaginationModule
+  
   ]
 })
 export class SharedModule {
