@@ -11,10 +11,6 @@ const projects = [{
 {
   nameProject: "arthurx",
   repositories: ['pacdev', 'teste1', 'teste2']
-},
-{
-  nameProject: "maxnb_",
-  repositories: ['fron-tcc', 'teste1', 'teste2']
 }
 ]
 
