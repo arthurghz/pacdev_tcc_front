@@ -98,6 +98,7 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-12">
+        <div *ngIf="getRepErro"class="text-danger">Selecione um repositório</div> 
         <mat-form-field appearance="fill">
           <mat-label>Escolha o Repositório</mat-label>
           <mat-select [(ngModel)]="repSelect" name="">
@@ -113,7 +114,7 @@
   <div class="modal-footer">
     <div class="row">
       <div class="col">
-        <button mat-raised-button (click)=" getInfosProject()" color="primary">Consultar</button>
+        <button mat-raised-button (click)="getInfosProject()" color="primary">Consultar</button>
       </div>
     </div>
   </div>

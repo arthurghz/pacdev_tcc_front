@@ -45,6 +45,7 @@ export class ListProjectsComponent implements OnInit {
   respMessage:any;
   showJobId: boolean = false;
   listJobId:any;
+  getRepErro:boolean = false;
   page = 1;
 
   formUpload: FormGroup = new FormGroup({
@@ -86,6 +87,7 @@ export class ListProjectsComponent implements OnInit {
 
   modalHistoryInit(selectRepository, repositories, gitUser){
     this.repSelect = '';
+    this.showJobId = false;
     this.repositories = repositories;
     this.gitUserSelect = gitUser
     this.modalHistoryList = this.modalService.show(selectRepository);
@@ -105,6 +107,8 @@ export class ListProjectsComponent implements OnInit {
   }
 
   getInfosProject() {
+    if(this.repSelect){
+     this.getRepErro = false;
      this.projectService.getProjectById(this.gitUserSelect, this.repSelect).subscribe(resp => {
       var downloadURL = window.URL.createObjectURL(resp);
       var link = document.createElement('a');
@@ -113,6 +117,9 @@ export class ListProjectsComponent implements OnInit {
       link.click();
       this.modalSelectRep.hide();
     }) 
+  }else{
+    this.getRepErro = true;
+  }
   }
 
   getFileTest(){
