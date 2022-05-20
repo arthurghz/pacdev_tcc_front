@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { GitProjectsService } from 'src/app/shared/service/git-projects.service';
+import { userTest } from 'src/app/shared/constants/variables';
 
 @Component({
   selector: 'app-history-projects',
@@ -14,6 +15,7 @@ export class HistoryProjectsComponent implements OnInit {
   job_Id:any;
   infoJobs:any;
   page=1;
+  userTest = userTest;
 
   constructor(private router:Router, private activateRouter:ActivatedRoute, private gitProject:GitProjectsService) { }
 

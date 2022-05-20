@@ -212,6 +212,10 @@ input.mat-input-element{
   color: $input-color;
 }
 
+textarea.mat-input-element, textarea.mat-input-element:disabled{
+  color: $input-color;
+}
+
 mat-label, h4{
   color: $input-color;
 }

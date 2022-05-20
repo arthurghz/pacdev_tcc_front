@@ -42,13 +42,17 @@ export class ListProjectsComponent implements OnInit {
   nameFileError:boolean=false;
   repSelectError:boolean=false;
   formData = new FormData();
-  respMessage:any;
+
   showJobId: boolean = false;
   listJobId:any;
   getRepErro:boolean = false;
+  respMessage:any;
+  registryMessage: any;
   page = 1;
 
-  formUpload: FormGroup = new FormGroup({
+
+
+  formTest: FormGroup = new FormGroup({
     gitUser: new FormControl(''),
     repo: new FormControl('', Validators.required),
     file: new FormControl('', Validators.required)
@@ -80,6 +84,8 @@ export class ListProjectsComponent implements OnInit {
 
   modalTestInit(testInit, repositories, gitUser){
     this.respMessage = '';
+    this.nameFile = '';
+    this.formTest.reset();
     this.repositories = repositories;
     this.gitUserSelect = gitUser
     this.modalTest =  this.modalService.show(testInit);
@@ -100,10 +106,10 @@ export class ListProjectsComponent implements OnInit {
       repo_name: this.repoProject,
     }
 
-    console.log(info);
+
     this.projectService.saveProject(info).subscribe(resp => {
-      console.log(resp);
-    });
+      this.modalRef.hide();
+    }, error=>this.registryMessage = error.error.message);
   }
 
   getInfosProject() {
@@ -124,8 +130,8 @@ export class ListProjectsComponent implements OnInit {
 
   getFileTest(){
 
-    if(this.formUpload.get('repo').value){
-    this.projectService.getFileTest(this.gitUserSelect, this.formUpload.get('repo').value).subscribe(resp => {
+    if(this.formTest.get('repo').value){
+    this.projectService.getFileTest(this.gitUserSelect, this.formTest.get('repo').value).subscribe(resp => {
       var downloadURL = window.URL.createObjectURL(resp);
       var link = document.createElement('a');
       link.href = downloadURL;
@@ -133,7 +139,7 @@ export class ListProjectsComponent implements OnInit {
       link.click();
     }) 
   }else{
-    this.formUpload.get('repo').markAsTouched();
+    this.formTest.get('repo').markAsTouched();
   }
   }
 
@@ -165,31 +171,31 @@ export class ListProjectsComponent implements OnInit {
       this.nameFileError = false;
     }
 
-    this.formUpload.get('file').setValue(this.file);
+    this.formTest.get('file').setValue(this.file);
   }
 
 
   submitFileTest(){
 
-    this.formUpload.markAllAsTouched();
+    this.formTest.markAllAsTouched();
 
-    if(this.formUpload.valid && !this.nameFileError){
+    if(this.formTest.valid && !this.nameFileError){
 
       const formData = new FormData();
 
-      formData.append('file', this.formUpload.get('file').value);
+      formData.append('file', this.formTest.get('file').value);
 
-      this.projectService.submitTest(this.gitUserSelect, this.formUpload.get('repo')?.value, formData).subscribe(resp=>{
+      this.projectService.submitTest(this.gitUserSelect, this.formTest.get('repo')?.value, formData).subscribe(resp=>{
         console.log(resp);
 
         if(resp['Status'].includes('Sucess')){
-          this.respMessage = `Teste submetido com sucesso!`
+          this.respMessage = `Test success submted!`
         }
 
-        this.formUpload.reset();
+        this.formTest.reset();
         this.file = '';
         this.nameFile = '';
-      })
+      }, error=> this.respMessage = error.error.message)
     }
 
   }

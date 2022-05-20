@@ -1,6 +1,6 @@
 <div class="containter-content">
     <mat-card>
-        <mat-card-title>Histórico</mat-card-title>
+        <mat-card-title>History</mat-card-title>
         <div class="col d-flex justify-content-end mt-3">
             <button mat-raised-button (click)="getLog()" color="primary">Log</button>
           </div>
@@ -8,11 +8,11 @@
             <table class="table table-borderless">
                 <thead>
                     <tr>
-                        <th scope="col">Nome</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Satus</th>
-                        <th scope="col">Conclusão</th>
-                        <th scope="col">Inicio</th>
-                        <th scope="col">Termino</th>
+                        <th scope="col">Conclusion</th>
+                        <th scope="col">Start</th>
+                        <th scope="col">Finish</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,9 +26,26 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="row mt-5">
+            <div class="col">
+                <mat-label>User Tests</mat-label>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <textarea [(ngModel)]="userTest" cdkTextareaAutosize cdkAutosizeMinRows="10" cdkAutosizeMaxRows="10" disabled="true" matInput></textarea>
+                  </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-label>Aplication Tests</mat-label>
+                <mat-form-field class="example-full-width" appearance="fill">
+               
+                    <textarea [(ngModel)]="userTest" cdkTextareaAutosize cdkAutosizeMinRows="10" cdkAutosizeMaxRows="10" disabled="true"  matInput></textarea>
+                  </mat-form-field>
+            </div>
+        </div>
+
     </mat-card>
     <div class="col d-flex justify-content-start mt-3">
-        <button mat-raised-button (click)="back()" color="primary">Voltar</button>
+        <button mat-raised-button (click)="back()" color="primary">Back</button>
       </div>
     
 </div>

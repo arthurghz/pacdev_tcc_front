@@ -1,21 +1,21 @@
 <div class="containter-content">
   <mat-card>
-    <mat-card-title>Projetos</mat-card-title>
+    <mat-card-title>Projects</mat-card-title>
 
     <div class="row mt-5">
       <div class="col d-flex justify-content-end">
-        <button mat-raised-button (click)="openModal(template)" color="primary">Cadastrar Novo</button>
+        <button mat-raised-button (click)="openModal(template)" color="primary">Add New</button>
       </div>
     </div>
     <div class="rows mt-5 table-responsive">
       <table class="table table-borderless">
         <thead>
           <tr>
-            <th scope="col">Nome do Projeto</th>
-            <th scope="col">Lista de Repositórios</th>
-            <th scope="col">Visualizar</th>
-            <th scope="col">Histórico</th>
-            <th scope="col">Teste</th>
+            <th scope="col">Name of project</th>
+            <th scope="col">List of repositories</th>
+            <th scope="col">View</th>
+            <th scope="col">History</th>
+            <th scope="col">Test</th>
           </tr>
         </thead>
         <tbody>
@@ -56,13 +56,13 @@
 
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Cadastro de Usuário</h4>
+    <h4 class="modal-title pull-left">Registry User</h4>
     <button mat-icon-button color="accent" class="pull-right" (click)="modalRef?.hide()">
       <mat-icon>close</mat-icon>
     </button>
   </div>
   <div class="modal-body">
-    <div class="row">
+    <div *ngIf="!registryMessage" class="row">
       <div class="col-12">
         <mat-form-field color="" appearance="outline">
           <mat-label>GitHub User</mat-label>
@@ -71,17 +71,22 @@
       </div>
       <div class="col-12">
         <mat-form-field appearance="outline">
-          <mat-label>Repositório</mat-label>
+          <mat-label>Repository</mat-label>
           <input [(ngModel)]="repoProject" matInput placeholder="" value="">
         </mat-form-field>
       </div>
     </div>
 
+    <div *ngIf="registryMessage" class="row d-flex justify-content-center  resp-message">
+      {{registryMessage}}
+     </div>
+ 
   </div>
   <div class="modal-footer">
     <div class="row">
       <div class="col">
-        <button mat-raised-button (click)="saveProject()" color="primary">Salvar</button>
+        <button *ngIf="!registryMessage"  mat-raised-button (click)="saveProject()" color="primary">Save</button>
+        <button *ngIf="registryMessage"  mat-raised-button (click)="modalRef?.hide()" color="primary">Ok</button>
       </div>
     </div>
   </div>
@@ -90,7 +95,7 @@
 
 <ng-template #modalRepository>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Repositórios</h4>
+    <h4 class="modal-title pull-left">Repositories</h4>
     <button mat-icon-button color="accent" class="pull-right" (click)="modalSelectRep?.hide()">
       <mat-icon>close</mat-icon>
     </button>
@@ -98,9 +103,9 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-12">
-        <div *ngIf="getRepErro"class="text-danger">Selecione um repositório</div> 
+        <div *ngIf="getRepErro"class="text-danger">Select a repository</div> 
         <mat-form-field appearance="fill">
-          <mat-label>Escolha o Repositório</mat-label>
+          <mat-label>Select Repository</mat-label>
           <mat-select [(ngModel)]="repSelect" name="">
             <mat-option>Selecione</mat-option>
             <mat-option *ngFor="let rep of repositories" [value]="rep">
@@ -114,7 +119,7 @@
   <div class="modal-footer">
     <div class="row">
       <div class="col">
-        <button mat-raised-button (click)="getInfosProject()" color="primary">Consultar</button>
+        <button mat-raised-button (click)="getInfosProject()" color="primary">Consult</button>
       </div>
     </div>
   </div>
@@ -122,7 +127,7 @@
 
 <ng-template #modalTest>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Submissão do Teste</h4>
+    <h4 class="modal-title pull-left">Test Submission</h4>
     <button mat-icon-button color="accent" class="pull-right" (click)="close()">
       <mat-icon>close</mat-icon>
     </button>
@@ -130,15 +135,15 @@
   <div class="modal-body">
 
     <div *ngIf="!respMessage" class="row">
-      <form [formGroup]="formUpload">
+      <form [formGroup]="formTest">
         <div class="col-12">
           <div class="text-danger"
-            *ngIf="formUpload.controls['repo'].hasError('required') && (formUpload.controls['repo'].dirty || formUpload.controls['repo'].touched)">
-            Selecione o repositório</div>
+            *ngIf="formTest.controls['repo'].hasError('required') && (formTest.controls['repo'].dirty || formTest.controls['repo'].touched)">
+            Select repository</div>
           <mat-form-field appearance="fill">
-            <mat-label>Escolha o Repositório</mat-label>
+            <mat-label>Select repository</mat-label>
             <mat-select formControlName="repo" name="">
-              <mat-option>Selecione</mat-option>
+              <mat-option>Select</mat-option>
               <mat-option *ngFor="let rep of repositories" [value]="rep">
                 {{rep}}
               </mat-option>
@@ -147,12 +152,12 @@
         </div>
         <div class="col-12">
           <div class="text-danger"
-            *ngIf="formUpload.controls['file'].hasError('required') && (formUpload.controls['file'].dirty || formUpload.controls['file'].touched)">
-            Selecione um arquivo</div>
+            *ngIf="formTest.controls['file'].hasError('required') && (formTest.controls['file'].dirty || formTest.controls['file'].touched)">
+            Select file</div>
           <div class="text-danger" *ngIf="nameFileError">
-            O nome do arquivo não deve conter espaços</div>
+            The file name must not contain spaces</div>
           <button mat-raised-button (click)="fileInput.click()" color="primary">
-            Enviar Arquivo
+            Select File
             <input #fileInput type="file" (change)="onInputFile($event)" style="display:none;" />
           </button>
         </div>
@@ -160,8 +165,7 @@
           <span class="file-span">{{nameFile}}</span>
         </div>
         <div class="col-12">
-          <button color="warn" class="download-button" (click)="getFileTest()" mat-button>Faça o download do modelo de
-            teste</button>
+          <button color="warn" type="button" class="download-button" (click)="getFileTest()" mat-button>Download the test file</button>
         </div>
       </form>
     </div>
@@ -174,7 +178,7 @@
   <div class="modal-footer">
     <div *ngIf="!respMessage" class="row">
       <div class="col">
-        <button mat-raised-button (click)="submitFileTest()" color="primary">Iniciar Teste</button>
+        <button mat-raised-button (click)="submitFileTest()" color="primary">Start</button>
       </div>
     </div>
     <div *ngIf="respMessage" class="row">
@@ -187,7 +191,7 @@
 
 <ng-template #modalHistory>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Histórico de Submissão</h4>
+    <h4 class="modal-title pull-left">Submission History</h4>
     <button mat-icon-button color="accent" class="pull-right" (click)="modalHistoryList?.hide()">
       <mat-icon>close</mat-icon>
     </button>
@@ -196,7 +200,7 @@
     <div class="row">
       <div class="col-12">
         <mat-form-field appearance="fill">
-          <mat-label>Escolha o Repositório</mat-label>
+          <mat-label>Select repository</mat-label>
           <mat-select (selectionChange)="getSubmission($event.value)" [(ngModel)]="repSelect" name="">
             <mat-option>Selecione</mat-option>
             <mat-option *ngFor="let rep of repositories" [value]="rep">
