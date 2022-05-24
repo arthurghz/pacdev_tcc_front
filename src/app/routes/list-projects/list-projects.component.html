@@ -44,9 +44,7 @@
                 <mat-icon>play_arrow</mat-icon>
               </button>
             </td>
-        
           </tr>
-
         </tbody>
       </table>
     </div>
@@ -114,12 +112,18 @@
           </mat-select>
         </mat-form-field>
       </div>
+      <div>
+        <mat-form-field *ngIf="readmeText" class="example-full-width" appearance="fill">
+          <textarea [(ngModel)]="readmeText"  cdkTextareaAutosize cdkAutosizeMinRows="15" cdkAutosizeMaxRows="15" disabled="true"  matInput></textarea>
+        </mat-form-field>
+      </div>
     </div>
   </div>
   <div class="modal-footer">
     <div class="row">
       <div class="col">
-        <button mat-raised-button (click)="getInfosProject()" color="primary">Consult</button>
+        <button mat-raised-button *ngIf="!readmeText" (click)="getInfosProject()" color="primary">Consult</button>
+        <button mat-raised-button *ngIf="readmeText"  (click)="modalSelectRep?.hide()" color="primary">Ok</button>
       </div>
     </div>
   </div>
@@ -183,7 +187,7 @@
     </div>
     <div *ngIf="respMessage" class="row">
       <div class="col">
-        <button mat-raised-button (click)="close()" color="primary">Ok</button>
+        <button mat-raised-button (click)="navigateToLastTest()" color="primary">Ok</button>
       </div>
     </div>
   </div>

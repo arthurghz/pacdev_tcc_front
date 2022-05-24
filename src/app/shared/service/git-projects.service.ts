@@ -23,7 +23,7 @@ export class GitProjectsService {
 
   getProjectById(gitUser, repoName){
 
-    return this.http.get<any>(`${this.endpointApi}/projects/${gitUser}/${repoName}`,{responseType: 'blob' as 'json'});
+    return this.http.get<any>(`${this.endpointApi}/projects/${gitUser}/${repoName}`);
   }
 
   getFileTest(gitUser, repoName){
@@ -41,6 +41,16 @@ export class GitProjectsService {
   getLogTest(gitUser, repoName, id){
     return this.http.get<any>(`${this.endpointApi}/history/${gitUser}/${repoName}/${id}/log`, {responseType: 'blob' as 'json'});
   }
+
+  getLogTestUser(gitUser, repoName, id){
+    return this.http.get<any>(`${this.endpointApi}/history/${gitUser}/${repoName}/${id}/log/user`);
+  }
+
+  getLogTestApp(gitUser, repoName, id){
+    return this.http.get<any>(`${this.endpointApi}/history/${gitUser}/${repoName}/${id}/log/app`);
+  }
+
+
 
   submitTest(gitUser, repoName, formData){
     return this.http.post<any>(`${this.endpointApi}/submission/${gitUser}/${repoName}`, formData);

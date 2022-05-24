@@ -15,7 +15,9 @@ export class HistoryProjectsComponent implements OnInit {
   job_Id:any;
   infoJobs:any;
   page=1;
-  userTest = userTest;
+  //userTest = userTest;
+  userTest:any;
+  appTest:any;
 
   constructor(private router:Router, private activateRouter:ActivatedRoute, private gitProject:GitProjectsService) { }
 
@@ -25,16 +27,22 @@ export class HistoryProjectsComponent implements OnInit {
     this.job_Id =  this.activateRouter.snapshot.params.job_Id
 
     this.gitProject.getStatusTest(this.gitUser, this.repoName, this.job_Id).subscribe(resp=>{
-      console.log(resp);
       this.infoJobs=resp['jobs'][0]['steps'];
     })
-  
+
+    
+    this.gitProject.getLogTestUser(this.gitUser, this.repoName, this.job_Id).subscribe(resp=>{
+      this.userTest = resp;
+    })
+
+    this.gitProject.getLogTestUser(this.gitUser, this.repoName, this.job_Id).subscribe(resp=>{
+      this.appTest = resp;
+    })
   }
 
 
   getLog(){
     this.gitProject.getLogTest(this.gitUser, this.repoName, this.job_Id).subscribe(resp=>{
-      console.log(resp);
       var downloadURL = window.URL.createObjectURL(resp);
       var link = document.createElement('a');
       link.href = downloadURL;

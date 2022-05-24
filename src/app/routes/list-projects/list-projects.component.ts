@@ -44,6 +44,9 @@ export class ListProjectsComponent implements OnInit {
   getRepErro:boolean = false;
   respMessage:any;
   registryMessage: any;
+  readmeText:any;
+  jobId:any;
+  testRepo:any;
   page = 1;
 
 
@@ -73,6 +76,7 @@ export class ListProjectsComponent implements OnInit {
 
   modalRepositories(selectRepository, repositories, gitUser) {
     this.repSelect = '';
+    this.readmeText = '';
     this.repositories = repositories;
     this.gitUserSelect = gitUser
     this.modalSelectRep = this.modalService.show(selectRepository);
@@ -112,12 +116,7 @@ export class ListProjectsComponent implements OnInit {
     if(this.repSelect){
      this.getRepErro = false;
      this.projectService.getProjectById(this.gitUserSelect, this.repSelect).subscribe(resp => {
-      var downloadURL = window.URL.createObjectURL(resp);
-      var link = document.createElement('a');
-      link.href = downloadURL;
-      link.download = "README.txt";
-      link.click();
-      this.modalSelectRep.hide();
+      this.readmeText = resp;
     }) 
   }else{
     this.getRepErro = true;
@@ -179,6 +178,8 @@ export class ListProjectsComponent implements OnInit {
 
       const formData = new FormData();
 
+      this.testRepo = this.formTest.get('repo')?.value;
+
       formData.append('file', this.formTest.get('file').value);
 
       this.projectService.submitTest(this.gitUserSelect, this.formTest.get('repo')?.value, formData).subscribe(resp=>{
@@ -186,6 +187,7 @@ export class ListProjectsComponent implements OnInit {
 
         if(resp['Status'].includes('Sucess')){
           this.respMessage = `Test success submted!`
+          this.jobId = resp['id_workflow']['job_id'];
         }
 
         this.formTest.reset();
@@ -194,6 +196,12 @@ export class ListProjectsComponent implements OnInit {
       }, error=> this.respMessage = error.error.message)
     }
 
+  }
+
+
+  navigateToLastTest(){
+    this.modalTest.hide();
+    this.router.navigate([`/history/${this.gitUserSelect}/${this.testRepo}/${this.jobId}`])
   }
 
 
