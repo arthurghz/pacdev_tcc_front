@@ -35,7 +35,7 @@ export class HistoryProjectsComponent implements OnInit {
       this.userTest = resp;
     })
 
-    this.gitProject.getLogTestUser(this.gitUser, this.repoName, this.job_Id).subscribe(resp=>{
+    this.gitProject.getLogTestApp(this.gitUser, this.repoName, this.job_Id).subscribe(resp=>{
       this.appTest = resp;
     })
   }

@@ -137,7 +137,7 @@ export class ListProjectsComponent implements OnInit {
       var downloadURL = window.URL.createObjectURL(resp);
       var link = document.createElement('a');
       link.href = downloadURL;
-      link.download = "fileTest.txt";
+      link.download = "test_user.py";
       link.click();
     }) 
   }else{
@@ -147,7 +147,7 @@ export class ListProjectsComponent implements OnInit {
 
   getSubmission(repoName){
     this.repSelect = repoName;
-    console.log(repoName, this.gitUserSelect);
+
     this.projectService.getHistoryTest(this.gitUserSelect, repoName).subscribe(resp=>{
       this.showJobId = true;
       this.listJobId = resp;
@@ -163,8 +163,7 @@ export class ListProjectsComponent implements OnInit {
   onInputFile(event){
    
     this.file = event.target.files[0];  
-    console.log(this.file)
-  
+
     this.nameFile = this.file.name;
     
     if(this.nameFile.includes(' ')){
@@ -190,8 +189,7 @@ export class ListProjectsComponent implements OnInit {
       formData.append('file', this.formTest.get('file').value);
 
       this.projectService.submitTest(this.gitUserSelect, this.formTest.get('repo')?.value, formData).subscribe(resp=>{
-        console.log(resp);
-
+   
         if(resp['Status'].includes('Sucess')){
           this.respMessage = `Test successfully!`
           this.jobId = resp['id_workflow']['job_id'];
