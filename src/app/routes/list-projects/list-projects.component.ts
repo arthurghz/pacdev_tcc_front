@@ -186,7 +186,7 @@ export class ListProjectsComponent implements OnInit {
         console.log(resp);
 
         if(resp['Status'].includes('Sucess')){
-          this.respMessage = `Test success submted!`
+          this.respMessage = `Test successfully!`
           this.jobId = resp['id_workflow']['job_id'];
         }
 
