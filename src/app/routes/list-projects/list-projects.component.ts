@@ -4,16 +4,6 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-const projects = [{
-  nameProject: "arthurghz",
-  repositories: ['pacdev', 'teste1', 'teste2']
-},
-{
-  nameProject: "arthurx",
-  repositories: ['pacdev', 'teste1', 'teste2']
-}
-]
-
 @Component({
   selector: 'app-list-projects',
   templateUrl: './list-projects.component.html',
@@ -49,6 +39,9 @@ export class ListProjectsComponent implements OnInit {
   testRepo:any;
   page = 1;
 
+  nameProjectError:boolean=false;
+  repoProjectError:boolean=false;
+
 
 
   formTest: FormGroup = new FormGroup({
@@ -71,6 +64,11 @@ export class ListProjectsComponent implements OnInit {
   }
 
   openModal(template) {
+    this.registryMessage = '';
+    this.nameProject = '';
+    this.repoProject = '';
+    this.nameProjectError = false;
+    this.repoProjectError = false;
     this.modalRef = this.modalService.show(template);
   }
 
@@ -100,16 +98,25 @@ export class ListProjectsComponent implements OnInit {
   }
 
   saveProject() {
-    let info =
-    {
+    
+    if(this.nameProject && this.repoProject){    
+      this.nameProjectError = false;
+      this.repoProjectError = false;
+
+    let info = {
       github_user: this.nameProject,
-      repo_name: this.repoProject,
-    }
+      repo_name: this.repoProject }
 
 
     this.projectService.saveProject(info).subscribe(resp => {
       this.modalRef.hide();
     }, error=>this.registryMessage = error.error.message);
+  }else{
+    this.nameProjectError = true;
+    this.repoProjectError = true;
+  }
+
+
   }
 
   getInfosProject() {

@@ -62,12 +62,18 @@
   <div class="modal-body">
     <div *ngIf="!registryMessage" class="row">
       <div class="col-12">
+        <div class="text-danger"
+        *ngIf="nameProjectError">
+        Fill GitHub User</div>
         <mat-form-field color="" appearance="outline">
           <mat-label>GitHub User</mat-label>
           <input [(ngModel)]="nameProject" matInput placeholder="" value="">
         </mat-form-field>
       </div>
       <div class="col-12">
+        <div class="text-danger"
+        *ngIf="repoProjectError">
+        Fill Repository</div>
         <mat-form-field appearance="outline">
           <mat-label>Repository</mat-label>
           <input [(ngModel)]="repoProject" matInput placeholder="" value="">
