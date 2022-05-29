@@ -38,6 +38,7 @@ export class ListProjectsComponent implements OnInit {
   jobId:any;
   testRepo:any;
   page = 1;
+  interval:any;
 
   nameProjectError:boolean=false;
   repoProjectError:boolean=false;
@@ -191,8 +192,12 @@ export class ListProjectsComponent implements OnInit {
       this.projectService.submitTest(this.gitUserSelect, this.formTest.get('repo')?.value, formData).subscribe(resp=>{
    
         if(resp['Status'].includes('Sucess')){
-          this.respMessage = `Test successfully!`
+          this.respMessage = `Submetido com sucesso!`
           this.jobId = resp['id_workflow']['job_id'];
+          this.interval = setInterval( () => {
+            this.navigateToLastTest();
+          }, 5000);
+
         }
 
         this.formTest.reset();
@@ -202,6 +207,12 @@ export class ListProjectsComponent implements OnInit {
     }
 
   }
+
+ ngOnDestroy(){
+   if(this.interval){
+     clearInterval(this.interval);
+   }
+ }
 
 
   navigateToLastTest(){

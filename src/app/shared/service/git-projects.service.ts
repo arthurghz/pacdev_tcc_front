@@ -50,8 +50,6 @@ export class GitProjectsService {
     return this.http.get<any>(`${this.endpointApi}/history/${gitUser}/${repoName}/${id}/log/app`);
   }
 
-
-
   submitTest(gitUser, repoName, formData){
     return this.http.post<any>(`${this.endpointApi}/submission/${gitUser}/${repoName}`, formData);
   }
